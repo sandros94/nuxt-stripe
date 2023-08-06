@@ -31,4 +31,4 @@ logs
 .LSOverride
 .fleet
 .idea
-.tgz*
+*.tgz*

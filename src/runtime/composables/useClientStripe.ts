@@ -1,4 +1,5 @@
 import { defu } from 'defu'
+import { useRuntimeConfig } from '#imports'
 import { loadStripe } from '@stripe/stripe-js'
 import type { Stripe, StripeConstructorOptions } from '@stripe/stripe-js'
 

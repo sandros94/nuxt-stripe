@@ -55,21 +55,21 @@ export default defineNuxtConfig({
   stripe: {
     // Client
     publishableKey: 'pk_test_123', // required
-    clientConfig: {
+    clientOptions: {
       apiVersion: '2022-11-15', // optional, default is '2022-11-15'
-      /** other stripe-js configs */
+      /** other stripe-js options */
     }
     // Server
     apiKey: 'sk_test_123', // required
-    serverConfig: {
+    serverOptions: {
       apiVersion: '2022-11-15', // optional, default is '2022-11-15'
-      /** other stripe configs */
+      /** other stripe options */
     }
   }
 })
 ```
 
-For all available `serverConfig` options take a look at the [official repo README](https://github.com/stripe/stripe-node#configuration). While for the `clientConfig` options take a look at the [official docs](https://stripe.com/docs/js/initializing#init_stripe_js-options).
+For all available `serverOptions` options take a look at the [official repo README](https://github.com/stripe/stripe-node#configuration). While for the `clientOptions` options take a look at the [official docs](https://stripe.com/docs/js/initializing#init_stripe_js-options).
 
 > We highly recommend you put your **production** keys in your `.env` file to avoid committing them
 

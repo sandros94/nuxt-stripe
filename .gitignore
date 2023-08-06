@@ -1,4 +1,4 @@
-# .gitignore v1.1.2
+# .gitignore v1.1.2-custom
 # https://gist.github.com/Sandros94/7f3dc1539c8f5905c495aa1bb417589c
 
 # Nuxt dev/build outputs
@@ -31,3 +31,4 @@ logs
 .LSOverride
 .fleet
 .idea
+.tgz*

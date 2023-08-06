@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://github.com/sandros94/nuxt-stripe/compare/v1.1.1...v1.1.2)
+
+### 🩹 Fixes
+
+- UseState not defined ([7534006](https://github.com/sandros94/nuxt-stripe/commit/7534006))
+
+### 🏡 Chore
+
+- **release:** V1.1.1 ([32512dc](https://github.com/sandros94/nuxt-stripe/commit/32512dc))
+
+### ❤️  Contributors
+
+- Sandros94 ([@Sandros94](http://github.com/Sandros94))
+
 ## v1.1.1
 
 [compare changes](https://github.com/sandros94/nuxt-stripe/compare/v1.1.0...v1.1.1)

@@ -1,0 +1,48 @@
+{
+  "name": "@sandros94/nuxt-stripe",
+  "version": "1.0.0",
+  "description": "Nuxt module for stripe",
+  "repository": "https://github.com/sandros94/nuxt-stripe",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "release": "pnpm run lint && pnpm run test && pnpm run prepack && changelogen --release && pnpm publish && git push --follow-tags",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.6.5",
+    "@stripe/stripe-js": "^1.54.2",
+    "defu": "^6.1.2",
+    "stripe": "^12.17.0"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^0.1.1",
+    "@nuxt/module-builder": "^0.4.0",
+    "@nuxt/schema": "^3.6.5",
+    "@nuxt/test-utils": "^3.6.5",
+    "@types/node": "^20.4.8",
+    "changelogen": "^0.5.4",
+    "eslint": "^8.46.0",
+    "nuxt": "^3.6.5",
+    "typescript": "^5.1.6",
+    "vitest": "^0.31.4"
+  }
+}

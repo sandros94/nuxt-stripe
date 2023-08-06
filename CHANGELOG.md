@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.1.3
+
+[compare changes](https://github.com/sandros94/nuxt-stripe/compare/v1.1.2...v1.1.3)
+
+### 🩹 Fixes
+
+- OnMounted import ([8327001](https://github.com/sandros94/nuxt-stripe/commit/8327001))
+
+### 🏡 Chore
+
+- **release:** V1.1.2 ([e0fceae](https://github.com/sandros94/nuxt-stripe/commit/e0fceae))
+
+### ❤️  Contributors
+
+- Sandros94 ([@Sandros94](http://github.com/Sandros94))
+
 ## v1.1.2
 
 [compare changes](https://github.com/sandros94/nuxt-stripe/compare/v1.1.1...v1.1.2)

@@ -1,4 +1,4 @@
-import { useRuntimeConfig, useState } from '#imports'
+import { useRuntimeConfig, useState, onMounted } from '#imports'
 import { defu } from 'defu'
 import { loadStripe } from '@stripe/stripe-js'
 import type { Stripe, StripeConstructorOptions } from '@stripe/stripe-js'

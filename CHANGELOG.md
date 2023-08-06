@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://github.com/sandros94/nuxt-stripe/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- UseClientStripe imports ([ce26219](https://github.com/sandros94/nuxt-stripe/commit/ce26219))
+
+### ❤️  Contributors
+
+- Sandros94 ([@Sandros94](http://github.com/Sandros94))
+
 ## v1.1.0
 
 [compare changes](https://github.com/sandros94/nuxt-stripe/compare/v1.0.0...v1.1.0)

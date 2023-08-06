@@ -25,13 +25,13 @@ export interface ModuleOptions {
    * Stripe config options for client side only
    * @docs https://stripe.com/docs/js/initializing
    */
-  clientConfig?: StripeConstructorOptions,
+  clientOptions?: StripeConstructorOptions,
 
   /**
    * Stripe config options for server side only
    * @docs https://github.com/stripe/stripe-node#configuration
    */
-  serverConfig?: Stripe.StripeConfig
+  serverOptions?: Stripe.StripeConfig
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -45,10 +45,10 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
       publishableKey: '' as string,
       apiKey: '' as string,
-      clientConfig: {
+      clientOptions: {
         apiVersion: '2022-11-15' as Stripe.LatestApiVersion
       },
-      serverConfig: {
+      serverOptions: {
         apiVersion: '2022-11-15' as Stripe.LatestApiVersion
       }
   },
@@ -58,13 +58,13 @@ export default defineNuxtModule<ModuleOptions>({
     // Public runtimeConfig
     nuxt.options.runtimeConfig.public.stripe = defu(nuxt.options.runtimeConfig.public.stripe, {
       publishableKey: options.publishableKey,
-      clientConfig: options.clientConfig
+      clientOptions: options.clientOptions
     })
 
     // Private runtimeConfig
     nuxt.options.runtimeConfig.stripe = defu(nuxt.options.runtimeConfig.stripe, {
       apiKey: options.apiKey,
-      serverConfig: options.serverConfig
+      serverOptions: options.serverOptions
     })
 
     // Transpile runtime

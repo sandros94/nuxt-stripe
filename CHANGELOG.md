@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.4
+
+[compare changes](https://github.com/sandros94/nuxt-stripe/compare/v1.1.3...v1.1.4)
+
+### 🏡 Chore
+
+- **release:** V1.1.3 ([d8dc3d1](https://github.com/sandros94/nuxt-stripe/commit/d8dc3d1))
+
+### ❤️  Contributors
+
+- Sandros94 ([@Sandros94](http://github.com/Sandros94))
+
 ## v1.1.3
 
 [compare changes](https://github.com/sandros94/nuxt-stripe/compare/v1.1.2...v1.1.3)

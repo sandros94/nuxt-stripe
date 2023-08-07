@@ -76,14 +76,16 @@ For all available `serverOptions` options take a look at the [official repo READ
 ### Client-side usage
 
 For client-side usage you can use the `useClientStripe` function to get a `stripe-js` instance.
-This composable is a wrap around the [`loadStripe`](https://github.com/stripe/stripe-js#loadstripe) and can be used in pages or plugins.
+This composable is a wrap around the [`loadStripe`](https://github.com/stripe/stripe-js#loadstripe) and can be used in pages or plugins. Remember to wrap `useClientStripe()` in a `ClientOnly` built-in composable or use it in a client-only composable like `Checkout.client.vue`
 
 #### Example
 ```vue
 <template>
-  <h1>Nuxt Stripe instance</h1>
   <div>
-    {{ stripe ? stripe : 'Loading...'}}
+    <h1>Nuxt Stripe instance</h1>
+    <ClientOnly>
+      {{ stripe ? stripe : 'Loading...'}}
+    </ClientOnly>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
-import { useRuntimeConfig, useState, onMounted } from '#imports'
+import { useRuntimeConfig } from '#imports'
 import { defu } from 'defu'
 import { loadStripe } from '@stripe/stripe-js'
-import type { Stripe, StripeConstructorOptions } from '@stripe/stripe-js'
+import type { StripeConstructorOptions } from '@stripe/stripe-js'
 
 interface useClientStripeOptions {
   publishableKey?: string
@@ -18,11 +18,8 @@ interface useClientStripeOptions {
  * @param {useClientStripeOptions} options.clientOptions - Object to override the default Stripe-js configuration
  */
 
-export default async function useClientStripe( { publishableKey, clientOptions }: useClientStripeOptions = {} ) {
+export default function useClientStripe( { publishableKey, clientOptions }: useClientStripeOptions = {} ) {
   const { public: {stripe: { publishableKey: defaultPublishableKey, clientOptions: defaultClientOptions }} } = useRuntimeConfig()
-
-  const stripe = useState<Stripe>('stripe-client', () => null)
-  const isLoading = useState('stripe-client-loading', () => false)
 
   const pKey = publishableKey ?? defaultPublishableKey
   const cOptions = defu( clientOptions, defaultClientOptions)
@@ -31,23 +28,5 @@ export default async function useClientStripe( { publishableKey, clientOptions }
     throw new Error('Missing publishableKey option.')
   }
 
-  async function _loadStripe() {
-    if (stripe.value){
-      return stripe.value
-    }
-  
-    isLoading.value = true
-  
-    return await loadStripe(pKey, cOptions)
-  }
-
-  onMounted(async () => {
-    if (!isLoading.value) {
-      const _stripe = await _loadStripe()
-      stripe.value = _stripe
-      isLoading.value = false
-    }
-  })
-
-  return stripe 
+  return loadStripe(pKey, cOptions)
 }

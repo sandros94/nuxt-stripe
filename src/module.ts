@@ -43,14 +43,14 @@ export default defineNuxtModule<ModuleOptions>({
     }
   },
   defaults: {
-      publishableKey: '' as string,
-      apiKey: '' as string,
-      clientOptions: {
-        apiVersion: '2022-11-15' as Stripe.LatestApiVersion
-      },
-      serverOptions: {
-        apiVersion: '2022-11-15' as Stripe.LatestApiVersion
-      }
+    publishableKey: '' as string,
+    apiKey: '' as string,
+    clientOptions: {
+      apiVersion: '2022-11-15' as Stripe.LatestApiVersion
+    },
+    serverOptions: {
+      apiVersion: '2022-11-15' as Stripe.LatestApiVersion
+    }
   },
   setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)

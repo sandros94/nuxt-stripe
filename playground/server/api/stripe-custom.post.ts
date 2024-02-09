@@ -1,5 +1,4 @@
 import { defineEventHandler } from 'h3'
-import { useServerStripe } from '#stripe/server'
 import type { Stripe } from 'stripe'
 
 export default defineEventHandler(async (event) => {
@@ -10,8 +9,7 @@ export default defineEventHandler(async (event) => {
     serverOptions: Stripe.StripeConfig
   } = await readBody(event)
 
-  // @ts-expect-error
-  const stripe = await useServerStripe(event, body )
+  const stripe = await useStripeServer(event, body )
   console.info("Stripe instance:", stripe)
 
   return {

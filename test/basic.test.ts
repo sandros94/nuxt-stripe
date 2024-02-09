@@ -47,7 +47,7 @@ describe('ssr', async () => {
    * Source: https://nuxt.com/docs/getting-started/testing#testing-in-a-browser
    * Tests should be processed manually using playground.
    * 
-  it('correctly overriding default useClientStripe configs', async () => {
+  it('correctly overriding default useStripeClient configs', async () => {
     const html = await $fetch('/stripe-client-custom')
 
     expect(html).not.toContain(`publishableKey:"${stripeTest.publishableKey}"`)
@@ -65,7 +65,7 @@ describe('ssr', async () => {
   })
 
   // this needs improvement, currently to check if the server is using the correct config
-  it('correctly overriding default useServerStripe configs', async () => {
+  it('correctly overriding default useStripeServer configs', async () => {
 
     const response = await $fetch('/api/stripe-custom', { method: 'POST', body: JSON.stringify(stripeCustomServerTest) })
 

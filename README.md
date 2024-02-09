@@ -75,8 +75,8 @@ For all available `serverOptions` options take a look at the [official repo READ
 
 ### Client-side usage
 
-For client-side usage you can use the `useClientStripe` function to get a `stripe-js` instance.
-This composable is a wrap around the [`loadStripe`](https://github.com/stripe/stripe-js#loadstripe) and can be used in pages or plugins. Remember to wrap `useClientStripe()` in a `ClientOnly` built-in composable or use it in a client-only composable like `Checkout.client.vue`
+For client-side usage you can use the `useStripeClient` function to get a `stripe-js` instance.
+This composable is a wrap around the [`loadStripe`](https://github.com/stripe/stripe-js#loadstripe) and can be used in pages or plugins. Remember to wrap `useStripeClient()` in a `ClientOnly` built-in composable or use it in a client-only composable like `Checkout.client.vue`
 
 #### Example
 ```vue
@@ -91,7 +91,7 @@ This composable is a wrap around the [`loadStripe`](https://github.com/stripe/st
 
 <script setup lang="ts">
 // Call the composable to get the Stripe instance
-const stripe = await useClientStripe()
+const stripe = await useStripeClient()
 
 // Use the Stripe instance to interact with the stripe.js library
 // stripe.redirectToCheckout(...)
@@ -100,16 +100,15 @@ const stripe = await useClientStripe()
 
 ### Server-side usage
 
-For server-side usage you can use the `useServerStripe` function to create a `stripe` instance.
+For server-side usage you can use the `useStripeServer` function to create a `stripe` instance.
 This instance should be used server-side to interact with the Stripe API.
 
 #### Example
 ```ts
 import { defineEventHandler } from 'h3'
-import { useServerStripe } from '#stripe/server'
 
 export default defineEventHandler(async (event) => {
-  const stripe = await useServerStripe(event)
+  const stripe = await useStripeServer(event)
   console.info("Stripe instance:", stripe)
 
   return {

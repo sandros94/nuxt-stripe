@@ -1,10 +1,10 @@
-import { defineNuxtModule, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, addImportsDir, addServerImportsDir, createResolver } from '@nuxt/kit'
 import defu from 'defu'
 import { fileURLToPath } from 'url'
 import { Stripe } from 'stripe'
 import type { StripeConstructorOptions } from '@stripe/stripe-js'
 
-export interface ModuleOptions {
+export interface ModuleOptionsPublic {
   /**
    * Stripe publishable key for client side only
    * @example 'pk_test_yOipfsEBmvrjWhSJFMCMX0yf'
@@ -14,6 +14,14 @@ export interface ModuleOptions {
   publishableKey: string | null,
 
   /**
+   * Stripe config options for client side only
+   * @docs https://stripe.com/docs/js/initializing
+   */
+  clientOptions?: StripeConstructorOptions,
+}
+
+export interface ModuleOptionsPrivate {
+  /**
    * Stripe private key for server side only
    * @example 'pk_test_yOipfsEBmvrjWhSJFMCMX0yf'
    * @type string | null
@@ -22,17 +30,13 @@ export interface ModuleOptions {
   apiKey: string | null,
 
   /**
-   * Stripe config options for client side only
-   * @docs https://stripe.com/docs/js/initializing
-   */
-  clientOptions?: StripeConstructorOptions,
-
-  /**
    * Stripe config options for server side only
    * @docs https://github.com/stripe/stripe-node#configuration
    */
   serverOptions?: Stripe.StripeConfig
 }
+
+export type ModuleOptions = ModuleOptionsPublic & ModuleOptionsPrivate
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -56,13 +60,19 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url)
 
     // Public runtimeConfig
-    nuxt.options.runtimeConfig.public.stripe = defu(nuxt.options.runtimeConfig.public.stripe, {
+    nuxt.options.runtimeConfig.public.stripe = defu<
+    ModuleOptionsPublic,
+    ModuleOptionsPublic[]
+  >(nuxt.options.runtimeConfig.public.stripe, {
       publishableKey: options.publishableKey,
       clientOptions: options.clientOptions
     })
 
     // Private runtimeConfig
-    nuxt.options.runtimeConfig.stripe = defu(nuxt.options.runtimeConfig.stripe, {
+    nuxt.options.runtimeConfig.stripe = defu<
+    ModuleOptionsPrivate,
+    ModuleOptionsPrivate[]
+  >(nuxt.options.runtimeConfig.stripe, {
       apiKey: options.apiKey,
       serverOptions: options.serverOptions
     })
@@ -71,22 +81,22 @@ export default defineNuxtModule<ModuleOptions>({
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
     nuxt.options.build.transpile.push(runtimeDir)
 
-    nuxt.hook('imports:dirs', (dirs) => {
-      dirs.push(resolve(runtimeDir, 'composables'))
-    })
+    // Add Composables
+    addImportsDir(resolve(runtimeDir, 'composables'))
 
-    nuxt.hook('nitro:config', (nitroConfig) => {
-      nitroConfig.alias = nitroConfig.alias || {}
-
-      // Inline module runtime in Nitro bundle
-      nitroConfig.externals = defu(typeof nitroConfig.externals === 'object' ? nitroConfig.externals : {}, {
-        inline: [resolve('./runtime')]
-      })
-      nitroConfig.alias['#stripe/server'] = resolve(runtimeDir, './server/services')
-    })
-
-    nuxt.hook('prepare:types', (options) => {
-      options.tsConfig.compilerOptions.paths['#stripe/server'] = [resolve(runtimeDir, './server/services')]
-    })
+    // Add Server Utils
+    addServerImportsDir(resolve(runtimeDir, 'server/utils'))
   }
 })
+
+declare module '@nuxt/schema' {
+  interface NuxtOptions {
+    stripe?: ModuleOptions;
+    runtimeConfig: {
+      stripe: ModuleOptionsPrivate;
+      public: {
+        stripe: ModuleOptionsPublic;
+      };
+    };
+  }
+}

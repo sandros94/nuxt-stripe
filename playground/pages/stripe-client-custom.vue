@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useClientStripe } from '#imports'
+import { useStripeClient } from '#imports'
 
 const stripeOptions = {
   publishableKey: 'pk_test_456',
@@ -22,5 +22,5 @@ const stripeOptions = {
   }
 }
 
-const stripeClient = await useClientStripe(stripeOptions)
+const stripeClient = await useStripeClient(stripeOptions)
 </script>

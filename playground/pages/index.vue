@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useClientStripe } from '#imports'
+import { useStripeClient } from '#imports'
 
-const stripeClient = await useClientStripe()
+const stripeClient = await useStripeClient()
 </script>
